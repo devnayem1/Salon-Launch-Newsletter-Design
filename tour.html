@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Schedule a Tour | Forever Beauty Salon Suites, McDonough, Georgia</title>
+<meta name="description" content="Request a tour of Forever Beauty Salon Suites in McDonough, Georgia.">
+<style>
+:root{--rose:#A65D74;--rose-d:#8A4A60;--blush:#F8EDEF;--ivory:#FAF7F2;--ink:#30292B;--body:#4A4144}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ivory);color:var(--body);font:16px/1.7 Arial,Helvetica,sans-serif}
+.wrap{max-width:640px;margin:0 auto;background:#fff}
+header{text-align:center;padding:28px 24px}
+header img{width:200px;max-width:60%;height:auto;display:block;margin:0 auto}
+.hero{display:block;width:100%;height:auto}
+.intro{padding:52px 40px 8px;text-align:center}
+h1{font:normal 34px/42px Georgia,'Times New Roman',serif;color:var(--ink);margin:0 0 18px}
+.intro p{margin:0 auto;max-width:460px}
+form{padding:36px 40px 56px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+label{display:block;font-size:14px;color:var(--ink);margin:0 0 6px}
+.f{margin-bottom:20px}
+input,select,textarea{width:100%;font:16px Arial,Helvetica,sans-serif;color:var(--ink);padding:14px;border:1px solid #CDBFC3;border-radius:2px;background:#fff}
+textarea{min-height:110px;resize:vertical}
+input:focus,select:focus,textarea:focus,button:focus-visible,a:focus-visible{outline:3px solid #C896A5;outline-offset:2px;border-color:var(--rose)}
+.err{display:none;color:#A12B3E;font-size:13px;margin-top:5px}
+.bad .err{display:block}.bad input,.bad select{border-color:#A12B3E}
+button{width:100%;background:var(--rose);color:#fff;border:0;border-radius:2px;padding:18px;font:bold 14px Arial,sans-serif;letter-spacing:2px;cursor:pointer}
+button:hover{background:var(--rose-d)}
+button[disabled]{opacity:.6;cursor:wait}
+.note{font-size:13px;color:#5A4F52;text-align:center;margin:14px 0 0}
+#status{display:none;margin:20px 0 0;padding:16px;background:var(--blush);color:var(--ink);text-align:center;border-radius:2px}
+.hp{position:absolute;left:-9999px}
+.photo{display:block;width:100%;height:auto}
+footer{background:var(--blush);text-align:center;padding:32px 24px;font-size:13px;line-height:20px}
+footer a{color:var(--rose-d)}
+@media(max-width:560px){.intro,form{padding-left:24px;padding-right:24px}h1{font-size:28px;line-height:36px}.row{grid-template-columns:1fr;gap:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><a href="https://www.foreverbeauty.com"><img src="assets/logo-320.png" width="200" height="64" alt="Forever Beauty Salon Suites"></a></header>
+<img class="hero" src="assets/hero-interior-600.jpg" width="600" height="640" alt="The Forever Beauty lounge with a blush pink sofa, cream chairs and a marble coffee table" style="max-height:420px;object-fit:cover;object-position:50% 40%">
+<section class="intro">
+<h1>Schedule a Tour</h1>
+<p>Visit our new McDonough, Georgia location and see the salon suites in person. Share a few details and our team will follow up to arrange your tour.</p>
+</section>
+<form id="tour" action="REPLACE_WITH_FORM_ENDPOINT" method="POST" novalidate>
+<div class="row">
+<div class="f"><label for="fn">First name</label><input id="fn" name="first_name" autocomplete="given-name" required><div class="err">Please enter your first name.</div></div>
+<div class="f"><label for="ln">Last name</label><input id="ln" name="last_name" autocomplete="family-name" required><div class="err">Please enter your last name.</div></div>
+</div>
+<div class="row">
+<div class="f"><label for="em">Email</label><input id="em" name="email" type="email" autocomplete="email" required><div class="err">Please enter a valid email address.</div></div>
+<div class="f"><label for="ph">Phone</label><input id="ph" name="phone" type="tel" autocomplete="tel" required><div class="err">Please enter a phone number.</div></div>
+</div>
+<div class="f"><label for="pr">Your profession</label><select id="pr" name="profession" required><option value="">Select one</option><option>Hair stylist</option><option>Barber</option><option>Nail technician</option><option>Esthetician</option><option>Lash or brow artist</option><option>Makeup artist</option><option>Massage therapist</option><option>Other</option></select><div class="err">Please choose your profession.</div></div>
+<div class="f"><label for="wh">Preferred day and time <span style="color:#5A4F52">(optional)</span></label><input id="wh" name="preferred_time" placeholder="For example, weekday mornings"></div>
+<div class="f"><label for="ms">Anything we should know? <span style="color:#5A4F52">(optional)</span></label><textarea id="ms" name="message"></textarea></div>
+<input class="hp" name="website_hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+<button type="submit" id="go">REQUEST A TOUR</button>
+<p class="note">Submitting a request does not guarantee a specific time or suite availability.</p>
+<div id="status" role="status" aria-live="polite"></div>
+</form>
+<img class="photo" src="assets/exterior-storefront-1160-2x.jpg" width="600" height="456" alt="The Forever Beauty Salon Suites storefront with illuminated signage">
+<footer>Forever Beauty Salon Suites<br>McDonough, Georgia<br><a href="https://www.foreverbeauty.com">foreverbeauty.com</a></footer>
+</div>
+<script>
+(function(){
+var f=document.getElementById('tour'),s=document.getElementById('status'),b=document.getElementById('go');
+function ok(el){var v=el.value.trim(),g=el.closest('.f'),good=!!v;
+ if(el.type==='email')good=/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v);
+ if(el.name==='phone')good=v.replace(/\D/g,'').length>=7;
+ g.classList.toggle('bad',!good);return good}
+f.querySelectorAll('[required]').forEach(function(e){e.addEventListener('blur',function(){ok(e)})});
+f.addEventListener('submit',function(ev){
+ ev.preventDefault();var all=true,first=null;
+ f.querySelectorAll('[required]').forEach(function(e){if(!ok(e)){all=false;first=first||e}});
+ if(!all){first.focus();return}
+ if(f.website_hp.value)return;
+ var url=f.getAttribute('action');s.style.display='block';
+ if(url.indexOf('REPLACE_')===0){s.textContent='This form is not connected yet. The site owner needs to add the form endpoint before requests can be received.';return}
+ b.disabled=true;
+ fetch(url,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)}).then(function(r){
+  if(!r.ok)throw 0;f.reset();s.textContent='Thank you. Your request has been received and our team will be in touch.'})
+ .catch(function(){s.textContent='Something went wrong. Please try again in a moment.'})
+ .then(function(){b.disabled=false})});
+})();
+</script>
+</body>
+</html>
